@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XO Battleground — Solana Mobile Game</title>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg:        #0D0D1A;
+      --card:      #16163A;
+      --border:    #2D2D54;
+      --purple:    #9945FF;
+      --green:     #14F195;
+      --fg:        #F8F8FF;
+      --muted:     #8080A0;
+      --red:       #FF4560;
+    }
+
+    html, body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont,
+                   'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    /* ── Background glow ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 10%,
+                        rgba(153,69,255,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 35% at 80% 80%,
+                        rgba(20,241,149,.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+      gap: 0;
+    }
+
+    /* ── Logo ── */
+    .logo-wrap {
+      width: 96px;
+      height: 96px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, var(--purple), var(--green));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      box-shadow: 0 0 40px rgba(153,69,255,.35);
+    }
+
+    .logo-wrap img {
+      width: 96px;
+      height: 96px;
+      border-radius: 26px;
+      object-fit: cover;
+    }
+
+    .logo-fallback {
+      font-size: 48px;
+      line-height: 1;
+    }
+
+    /* ── Title ── */
+    h1 {
+      font-size: clamp(28px, 6vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+
+    /* ── Network badge ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(20,241,149,.08);
+      border: 1px solid rgba(20,241,149,.3);
+      color: var(--green);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: .35; }
+    }
+
+    /* ── Tagline ── */
+    .tagline {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+      text-align: center;
+      max-width: 420px;
+      margin-bottom: 40px;
+    }
+
+    /* ── Feature cards ── */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      width: 100%;
+      max-width: 680px;
+      margin-bottom: 40px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature-icon {
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── Platform strip ── */
+    .platform {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-bottom: 40px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .platform strong {
+      color: var(--fg);
+    }
+
+    /* ── Links ── */
+    .links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: var(--card);
+      transition: border-color .2s, color .2s;
+    }
+
+    .link-btn:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+    }
+
+    .link-btn.primary {
+      border-color: rgba(153,69,255,.5);
+      color: var(--purple);
+    }
+
+    .link-btn.primary:hover {
+      background: rgba(153,69,255,.1);
+    }
+
+    /* ── Contact ── */
+    .contact {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .contact a {
+      color: var(--purple);
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 48px;
+      font-size: 12px;
+      color: #4A4A6A;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <img
+      src="icon.png"
+      alt="XO Battleground"
+      onerror="this.style.display='none';
+               this.nextElementSibling.style.display='block'"
+    />
+    <span class="logo-fallback" style="display:none">#</span>
+  </div>
+
+  <!-- Title -->
+  <h1>XO Battleground</h1>
+
+  <!-- Badge -->
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Solana Mainnet
+  </div>
+
+  <!-- Tagline -->
+  <p class="tagline">
+    Classic Tic-Tac-Toe reimagined for Solana Mobile.
+    Challenge an AI and save your victory on&#8209;chain,
+    or play locally with a friend — no wallet required.
+  </p>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feature-card">
+      <span class="feature-icon">🤖</span>
+      <span class="feature-title">VS AI Mode</span>
+      <span class="feature-desc">
+        Smart opponent with win/block strategy.
+        Save results permanently on Solana Mainnet.
+      </span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">👥</span>
+      <span class="feature-title">Local 2 Players</span>
+      <span class="feature-desc">
+        Pass-and-play on one device.
+        No wallet or internet needed.
+      </span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">⛓️</span>
+      <span class="feature-title">On-Chain Saves</span>
+      <span class="feature-desc">
+        Game results written to Solana via
+        the Memo Program. View on Solscan.
+      </span>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔒</span>
+      <span class="feature-title">Privacy First</span>
+      <span class="feature-desc">
+        No backend. No analytics.
+        All data stored on-device only.
+      </span>
+    </div>
+  </div>
+
+  <!-- Platform -->
+  <div class="platform">
+    📱 <strong>Android</strong> &nbsp;·&nbsp;
+    Solana Mobile Stack &nbsp;·&nbsp;
+    Mobile Wallet Adapter v2
+  </div>
+
+  <!-- Links -->
+  <div class="links">
+    <a class="link-btn primary" href="privacy-policy.html">
+      🔐 Privacy Policy
+    </a>
+    <a class="link-btn primary" href="terms-of-use.html">
+      📄 Terms of Use
+    </a>
+    <a class="link-btn"
+       href="https://github.com/viva-fidz"
+       target="_blank" rel="noopener">
+      GitHub ↗
+    </a>
+  </div>
+
+  <!-- Contact -->
+  <p class="contact">
+    Questions?
+    <a href="mailto:viva.fidz.crypt@gmail.com">
+      viva.fidz.crypt@gmail.com
+    </a>
+  </p>
+
+  <footer>
+    © 2025 XO Battleground · Built for Solana Mobile
+  </footer>
+
+</div>
+</body>
+</html>
