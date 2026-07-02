@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +52,6 @@
       padding: 60px 24px 80px;
     }
 
-    /* ── Back link ── */
     .back {
       display: inline-flex;
       align-items: center;
@@ -65,10 +65,7 @@
     }
     .back:hover { opacity: 1; }
 
-    /* ── Header ── */
-    .doc-header {
-      margin-bottom: 40px;
-    }
+    .doc-header { margin-bottom: 40px; }
 
     .doc-header h1 {
       font-size: clamp(24px, 5vw, 34px);
@@ -95,10 +92,7 @@
       gap: 5px;
     }
 
-    /* ── Sections ── */
-    .section {
-      margin-bottom: 36px;
-    }
+    .section { margin-bottom: 36px; }
 
     h2 {
       font-size: 11px;
@@ -118,7 +112,6 @@
       margin-bottom: 12px;
     }
 
-    /* ── Table ── */
     .table-wrap {
       overflow-x: auto;
       border-radius: 12px;
@@ -126,14 +119,9 @@
       margin: 4px 0 12px;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+    table { width: 100%; border-collapse: collapse; }
 
-    thead tr {
-      background: var(--card);
-    }
+    thead tr { background: var(--card); }
 
     th {
       padding: 12px 16px;
@@ -153,11 +141,8 @@
       line-height: 1.5;
     }
 
-    tr:hover td {
-      background: rgba(255,255,255,.02);
-    }
+    tr:hover td { background: rgba(255,255,255,.02); }
 
-    /* ── Highlight box ── */
     .highlight {
       background: var(--card);
       border: 1px solid var(--border);
@@ -167,16 +152,9 @@
       margin: 4px 0 12px;
     }
 
-    .highlight p {
-      margin: 0;
-      font-size: 14px;
-    }
+    .highlight p { margin: 0; font-size: 14px; }
+    .highlight.green { border-left-color: var(--green); }
 
-    .highlight.green {
-      border-left-color: var(--green);
-    }
-
-    /* ── Contact block ── */
     .contact-block {
       margin-top: 48px;
       background: var(--card);
@@ -188,10 +166,7 @@
       gap: 16px;
     }
 
-    .contact-icon {
-      font-size: 28px;
-      flex-shrink: 0;
-    }
+    .contact-icon { font-size: 28px; flex-shrink: 0; }
 
     .contact-block h3 {
       font-size: 15px;
@@ -206,11 +181,8 @@
       font-size: 14px;
     }
 
-    .contact-block a:hover {
-      text-decoration: underline;
-    }
+    .contact-block a:hover { text-decoration: underline; }
 
-    /* ── Footer ── */
     footer {
       margin-top: 48px;
       text-align: center;
@@ -253,10 +225,7 @@
     <div class="table-wrap">
       <table>
         <thead>
-          <tr>
-            <th>Type</th>
-            <th>Status</th>
-          </tr>
+          <tr><th>Type</th><th>Status</th></tr>
         </thead>
         <tbody>
           <tr><td>Name, email, phone number</td><td>❌ Not collected</td></tr>
@@ -279,10 +248,7 @@
     <div class="table-wrap">
       <table>
         <thead>
-          <tr>
-            <th>Data</th>
-            <th>Purpose</th>
-          </tr>
+          <tr><th>Data</th><th>Purpose</th></tr>
         </thead>
         <tbody>
           <tr>
@@ -347,10 +313,7 @@
     <div class="table-wrap">
       <table>
         <thead>
-          <tr>
-            <th>Accessed</th>
-            <th>Purpose</th>
-          </tr>
+          <tr><th>Accessed</th><th>Purpose</th></tr>
         </thead>
         <tbody>
           <tr>
@@ -386,12 +349,67 @@
   <!-- 7 -->
   <div class="section">
     <h2>7. Permissions</h2>
+    <p>
+      The App uses the following Android permissions. Most are added
+      automatically by the libraries and SDKs the App depends on
+      (Expo, React Native, Mobile Wallet Adapter).
+      <strong style="color:#F8F8FF">No sensitive user data is
+      collected through these permissions.</strong>
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Permission</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>INTERNET</td>
+            <td>Connect to Solana RPC and blockchain network</td>
+          </tr>
+          <tr>
+            <td>ACCESS_NETWORK_STATE</td>
+            <td>Check network availability (React Native)</td>
+          </tr>
+          <tr>
+            <td>SYSTEM_ALERT_WINDOW</td>
+            <td>Required by Mobile Wallet Adapter for wallet popup overlay</td>
+          </tr>
+          <tr>
+            <td>VIBRATE</td>
+            <td>Haptic feedback during gameplay</td>
+          </tr>
+          <tr>
+            <td>MODIFY_AUDIO_SETTINGS</td>
+            <td>Sound effects via expo-av library</td>
+          </tr>
+          <tr>
+            <td>RECORD_AUDIO</td>
+            <td>Declared by expo-av library — microphone is not used</td>
+          </tr>
+          <tr>
+            <td>READ_EXTERNAL_STORAGE</td>
+            <td>Required by React Native framework</td>
+          </tr>
+          <tr>
+            <td>WRITE_EXTERNAL_STORAGE</td>
+            <td>Required by React Native framework</td>
+          </tr>
+          <tr>
+            <td>USE_BIOMETRIC</td>
+            <td>Secure credential storage via expo-secure-store</td>
+          </tr>
+          <tr>
+            <td>USE_FINGERPRINT</td>
+            <td>Secure credential storage via expo-secure-store</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="highlight green">
       <p>
-        XO Battleground declares
-        <strong style="color:#F8F8FF">no Android permissions</strong>
-        in its manifest. No microphone, camera, contacts,
-        or location access is requested or used.
+        The App does <strong style="color:#F8F8FF">not</strong> actively
+        use microphone, camera, contacts, or location.
+        No user data is collected through any of these permissions.
       </p>
     </div>
   </div>
@@ -430,9 +448,10 @@
   </div>
 
   <footer>
-    © 2026 XO Battleground · All rights reserved
+    © 2025 XO Battleground · All rights reserved
   </footer>
 
 </div>
 </body>
 </html>
+```
