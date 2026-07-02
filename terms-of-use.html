@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Use — XO Battleground</title>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg:     #0D0D1A;
+      --card:   #16163A;
+      --border: #2D2D54;
+      --purple: #9945FF;
+      --green:  #14F195;
+      --fg:     #F8F8FF;
+      --muted:  #8080A0;
+      --text:   #C0C0D0;
+    }
+
+    html, body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont,
+                   'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 30% at 85% 5%,
+                        rgba(153,69,255,.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 25% at 15% 90%,
+                        rgba(20,241,149,.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: var(--purple);
+      font-size: 14px;
+      margin-bottom: 40px;
+      opacity: .85;
+      transition: opacity .2s;
+    }
+    .back:hover { opacity: 1; }
+
+    .doc-header {
+      margin-bottom: 40px;
+    }
+
+    .doc-header h1 {
+      font-size: clamp(24px, 5vw, 34px);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .meta {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .section {
+      margin-bottom: 36px;
+    }
+
+    h2 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+      margin: 16px 0 8px;
+    }
+
+    p {
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    ul li::before {
+      content: '–';
+      color: var(--purple);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .highlight {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--purple);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 18px;
+      margin: 4px 0 12px;
+    }
+
+    .highlight p { margin: 0; font-size: 14px; }
+    .highlight.green { border-left-color: var(--green); }
+    .highlight.red   { border-left-color: #FF4560; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 500px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    .mode-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .mode-card .mode-icon {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .mode-card .mode-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 6px;
+    }
+
+    .mode-card p {
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .contact-block {
+      margin-top: 48px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .contact-icon { font-size: 28px; flex-shrink: 0; }
+
+    .contact-block h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 4px;
+    }
+
+    .contact-block a {
+      color: var(--purple);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .contact-block a:hover { text-decoration: underline; }
+
+    footer {
+      margin-top: 48px;
+      text-align: center;
+      font-size: 12px;
+      color: #4A4A6A;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <a href="index.html" class="back">← Back to XO Battleground</a>
+
+  <div class="doc-header">
+    <h1>Terms of Use</h1>
+    <div class="meta">
+      <span>📅 Effective Date: July 1, 2025</span>
+      <span>📦 com.vivafidz.xobattleground</span>
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <div class="section">
+    <h2>1. Acceptance</h2>
+    <p>
+      By downloading or using XO Battleground ("the App"),
+      you agree to these Terms of Use. If you do not agree,
+      please do not use the App.
+    </p>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <h2>2. What the App Does</h2>
+    <p>XO Battleground is a Tic-Tac-Toe game for Android
+    (Solana Mobile) with two modes:</p>
+    <div class="two-col">
+      <div class="mode-card">
+        <div class="mode-icon">🤖</div>
+        <div class="mode-title">VS AI</div>
+        <p>Play against an AI opponent.
+        Results may be optionally saved on
+        the Solana blockchain via the Memo Program.</p>
+      </div>
+      <div class="mode-card">
+        <div class="mode-icon">👥</div>
+        <div class="mode-title">Local 2 Players</div>
+        <p>Pass-and-play on one device.
+        Results stored locally only.
+        No blockchain interaction.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <h2>3. Eligibility</h2>
+    <p>
+      You must be at least <strong style="color:#F8F8FF">13 years old</strong>
+      to use the App. By using the App you represent
+      that you meet this requirement.
+    </p>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <h2>4. Blockchain & Wallet Usage</h2>
+
+    <h3>4.1 On-Chain Saves</h3>
+    <p>
+      Saving a game result on-chain is optional and requires
+      a connected Solana wallet via Mobile Wallet Adapter.
+      Each save writes a Memo transaction to Solana Mainnet
+      and incurs a small network fee (typically &lt; 0.000005 SOL)
+      paid from your wallet.
+    </p>
+    <div class="highlight red">
+      <p>
+        On-chain records are
+        <strong style="color:#F8F8FF">permanent and irreversible.</strong>
+        Once confirmed, they cannot be deleted or modified.
+      </p>
+    </div>
+
+    <h3>4.2 Donations</h3>
+    <p>
+      The "Support Developer" feature is entirely voluntary.
+      SOL transfers are final once confirmed on-chain.
+      No refunds are possible for confirmed blockchain transactions.
+    </p>
+
+    <h3>4.3 Wallet Security</h3>
+    <p>
+      You are solely responsible for the security of your wallet
+      and private keys. The App never accesses or stores your
+      private keys or seed phrase. Always verify transaction
+      details in your wallet app before approving.
+    </p>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <h2>5. No Financial Services</h2>
+    <div class="highlight green">
+      <p>
+        XO Battleground is a <strong style="color:#F8F8FF">game</strong>,
+        not a financial product. No gambling, wagering, or financial
+        returns are offered or implied. SOL transactions are utility
+        actions — not investments or securities.
+      </p>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <h2>6. Acceptable Use</h2>
+    <p>You agree <strong style="color:#F8F8FF">not</strong> to:</p>
+    <ul>
+      <li>Reverse-engineer, decompile, or modify the App</li>
+      <li>Use the App to violate any applicable law or regulation</li>
+      <li>Attempt to exploit bugs to manipulate blockchain records</li>
+      <li>Use the App in any jurisdiction where doing so is prohibited</li>
+    </ul>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <h2>7. Intellectual Property</h2>
+    <p>
+      All App content — UI, code, graphics, sound effects —
+      is the intellectual property of the developer.
+      You receive a limited, non-exclusive, non-transferable
+      license to use the App for personal, non-commercial purposes.
+    </p>
+  </div>
+
+  <!-- 8 -->
+  <div class="section">
+    <h2>8. Disclaimer of Warranties</h2>
+    <p>
+      The App is provided
+      <strong style="color:#F8F8FF">"as is"</strong>
+      without warranties of any kind. We are not responsible for:
+    </p>
+    <ul>
+      <li>Solana network outages or congestion</li>
+      <li>Failed or delayed transactions</li>
+      <li>Changes in network transaction fees</li>
+      <li>Wallet software behavior or errors</li>
+    </ul>
+  </div>
+
+  <!-- 9 -->
+  <div class="section">
+    <h2>9. Limitation of Liability</h2>
+    <p>
+      To the maximum extent permitted by law, the developer
+      shall not be liable for any indirect, incidental, special,
+      or consequential damages arising from your use of the App,
+      including loss of SOL or other digital assets.
+    </p>
+  </div>
+
+  <!-- 10 -->
+  <div class="section">
+    <h2>10. Changes to These Terms</h2>
+    <p>
+      We may update these Terms at any time.
+      The effective date at the top reflects the latest revision.
+      Continued use of the App after changes constitutes
+      acceptance of the updated Terms.
+    </p>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact-block">
+    <span class="contact-icon">📧</span>
+    <div>
+      <h3>Questions about these Terms?</h3>
+      <a href="mailto:viva.fidz.crypt@gmail.com">
+        viva.fidz.crypt@gmail.com
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 XO Battleground · All rights reserved
+  </footer>
+
+</div>
+</body>
+</html>
